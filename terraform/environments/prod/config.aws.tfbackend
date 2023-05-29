@@ -1,0 +1,5 @@
+region         = "us-east-1"
+bucket         = "microbio-terraform-state"
+key            = "platform/terraform.tfstate"
+dynamodb_table = "microbio-terraform-state-lock"
+encrypt        = true
