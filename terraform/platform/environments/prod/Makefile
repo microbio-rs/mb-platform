@@ -1,4 +1,4 @@
-.PHONY: init plan
+.PHONY: init plan apply apply-approve destroy
 
 init:
 	terraform init -backend-config=config.aws.tfbackend
