@@ -34,3 +34,7 @@
 
 
 * [ ] Team Flowchart create
+* [ ] Invite Slack (https://api.slack.com/methods/admin.users.invite) existe event when user accept invite?
+    * [ ] Add user to channels
+* [ ] AWS Add Team
+* [ ] Add user to group of email
