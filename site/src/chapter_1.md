@@ -31,6 +31,8 @@
     * Group
     * Roles
 13. Blue/Green
+14. Vault
+15. Monitoring
 
 
 * [ ] Team Flowchart create
