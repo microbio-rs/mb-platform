@@ -33,10 +33,14 @@
 13. Blue/Green
 14. Vault
 15. Monitoring
+16. SonarCube
 
+## ToDo
+1. Terragrunt
 
 * [ ] Team Flowchart create
 * [ ] Invite Slack (https://api.slack.com/methods/admin.users.invite) existe event when user accept invite?
     * [ ] Add user to channels
 * [ ] AWS Add Team
 * [ ] Add user to group of email
+
