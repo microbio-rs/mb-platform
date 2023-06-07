@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 #!/usr/bin/env python3
 #
 # Copyright (c) 2023 Murilo Ijanc' <mbsd@m0x.ru>
