@@ -4,6 +4,8 @@
 
 ## Recursos da AWS
 
+Os recursos abaixo serão montados com **terraform** e **terragrunt**.
+
 1. Compute
     - [ ] ECR
     - [ ] ECS
@@ -38,11 +40,14 @@
     - [ ] VPC Endpoint
 7. Security
     - [ ] ACM
+    - [ ] Cognito
     - [ ] KMS
     - [ ] Secrets Manager
     - [ ] WAF
 8. Storage
     - [ ] S3
+
+## Blog
 
 ## Aws Free
 

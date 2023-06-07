@@ -36,7 +36,7 @@ from diagrams.aws.network import (ALB, CF, AppMesh, InternetGateway,
                                   NATGateway, PrivateSubnet, PublicSubnet,
                                   Route53, VPCElasticNetworkInterface)
 # aws security
-from diagrams.aws.security import ACM, IAM, KMS, WAF, SecretsManager
+from diagrams.aws.security import ACM, IAM, KMS, WAF, Cognito, SecretsManager
 # aws storage
 from diagrams.aws.storage import S3
 
