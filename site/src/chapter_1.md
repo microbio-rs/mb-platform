@@ -2,6 +2,55 @@
 
 > "Melhorar o fluxo de valor tecnológico é essencial para atingir os resultados DevOps"
 
+## Recursos da AWS
+
+1. Compute
+    - [ ] ECR
+    - [ ] ECS
+        - [ ] Fargate
+        - [ ] Service
+        - [ ] Task
+        - [ ] Task Definition
+2. Database
+    - [ ] DynamoDB
+    - [ ] ElasticCache
+    - [ ] RDS
+3. Devtools
+    - [ ] XRay
+4. Integration
+    - [ ] SNS
+    - [ ] SQS
+5. Engagement
+    - [ ] App Mesh
+    - [ ] Cloudwatch
+        - [ ] Alarm
+        - [ ] Event
+        - [ ] Log
+    - [ ] SES
+6. Network
+    - [ ] ALB
+    - [ ] Internet Gateway
+    - [ ] NAT ?
+    - [ ] RouteTable
+    - [ ] Subnet Public/Private/DB/Intra
+    - [ ] VPC
+    - [ ] VPC Endpoint
+7. Security
+    - [ ] ACM
+    - [ ] KMS
+    - [ ] Secrets Manager
+    - [ ] WAF
+8. Storage
+    - [ ] S3
+
+## Aws Free
+
+Lista de recursos que são Free por 12 meses ou Free até ultrapassar o limite.
+
+|Service|Always Free|Limits|
+|-------|-----------|------|
+
+
 ## How do we do it
 
 1. making work visible
