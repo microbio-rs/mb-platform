@@ -47,20 +47,7 @@ Os recursos abaixo serão montados com **terraform** e **terragrunt**.
     - [ ] Secrets Manager
     - [ ] WAF
 8. Storage
-    - [ ] *S3
-
-## Blog
-
-* [ ] Criar repo (terra{form,grunt}) platform
-* [ ] Diagrama architecture
-* [ ] Criar Infra (terra{form,grunt})
-    1. [ ] Route53 (shared) *microbio.rs* platform
-    2. [ ] ACM (shared) *.microbio.rs* platform
-    3. [ ] S3
-    3. [ ] CloudFront (shared) platform
-    4. [ ] Lambda Edge (shared?)
-* [ ] Primeiro post (sobre blog)
-* [ ] Criar CI/CD
+    - [ ] S3
 
 ## Iniciar testes com
 
