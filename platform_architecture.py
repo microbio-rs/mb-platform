@@ -18,7 +18,7 @@
 from diagrams import Cluster, Diagram, Edge
 # aws compute
 from diagrams.aws.compute import (ECR, ECS, ElasticContainerServiceService,
-                                  Fargate)
+                                  Fargate, LambdaFunction)
 # aws database
 from diagrams.aws.database import DDB, RDS, ElastiCache
 # aws devtools
@@ -26,7 +26,7 @@ from diagrams.aws.devtools import XRay
 # aws engagement
 from diagrams.aws.engagement import SES
 # general
-from diagrams.aws.general import User, Client
+from diagrams.aws.general import Client, User
 # aws integration
 from diagrams.aws.integration import SNS, SQS
 # aws management

@@ -11,6 +11,7 @@
         - [ ] Service
         - [ ] Task
         - [ ] Task Definition
+    - [ ] Lambda
 2. Database
     - [ ] DynamoDB
     - [ ] ElasticCache
