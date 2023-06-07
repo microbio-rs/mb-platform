@@ -3,6 +3,18 @@ variable "owner" {
   type        = string
 }
 
+variable "repo_license" {
+  description = "license repo"
+  type        = string
+  default     = ""
+}
+
+variable "repo_init" {
+  description = "init repo"
+  type        = bool
+  default     = false
+}
+
 variable "repo_default_branch" {
   description = "default repo branch"
   type        = string

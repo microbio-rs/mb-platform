@@ -3,8 +3,8 @@ resource "github_repository" "repo" {
   description      = var.repo_description
   visibility       = var.repo_public == true ? "public" : "private"
   has_wiki         = false
-  license_template = "mit"
-  auto_init        = true
+  license_template = var.license
+  auto_init        = var.init
 }
 
 resource "github_branch_default" "default" {
