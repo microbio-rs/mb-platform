@@ -1,14 +1,18 @@
 resource "github_repository" "repo" {
-  name             = var.repo_name
-  description      = var.repo_description
-  visibility       = var.repo_public == true ? "public" : "private"
+  name             = var.github_repository.name
+  description      = var.github_repository.description
+  visibility       = var.github_repository.public == true ? "public" : "private"
   has_wiki         = false
-  license_template = var.license
-  auto_init        = var.init
+  license_template = var.github_repository.license
+  auto_init        = var.github_repository.init
+}
+
+resource "github_branch" "master" {
+  repository = github_repository.repo.name
+  branch     = var.github_repository.default_branch
 }
 
 resource "github_branch_default" "default" {
   repository = github_repository.repo.name
-  branch     = var.repo_default_branch
-  rename     = true
+  branch     = var.github_repository.default_branch
 }
