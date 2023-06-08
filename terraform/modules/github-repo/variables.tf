@@ -1,8 +1,3 @@
-variable "owner" {
-  description = "owner"
-  type        = string
-}
-
 variable "repo_license" {
   description = "license repo"
   type        = string
