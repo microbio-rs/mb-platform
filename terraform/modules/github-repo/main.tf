@@ -14,5 +14,8 @@ resource "github_branch" "master" {
 
 resource "github_branch_default" "default" {
   repository = github_repository.repo.name
-  branch     = var.github_repository.default_branch
+  branch     = github_branch.master.branch
+  depends_on = [
+    github_branch.master
+  ]
 }

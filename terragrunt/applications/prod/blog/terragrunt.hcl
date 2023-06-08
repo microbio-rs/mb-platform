@@ -18,6 +18,7 @@ locals {
   tags = merge(include.root.locals.root_tags, include.stage.locals.tags, local.local_tags)
 }
 
+
 generate "provider_global" {
   path      = "provider.tf"
   if_exists = "overwrite"
@@ -46,18 +47,28 @@ provider "github" {
 EOF
 }
 
+dependency "dns" {
+  config_path = "${get_parent_terragrunt_dir("root")}/shared/${include.stage.locals.stage}/network/dns"
+  # mock_outputs_allowed_terraform_commands = ["init", "validate", "plan"]
+  # mock_outputs = {
+  #   aws_alb_arn          = "arn:aws:elasticloadbalancing:eu-central-1:643202173500:   loadbalancer/app/ghost-alb/9XXX000XXX000XXX"
+  #   aws_sg_egress_all_id = "some-id"
+  # }
+}
+
 inputs = {
-  github_repository  = {
-    name             = "blog"
-    description      = "microbio.rs blog"
-    public = true
-    has_wiki         = false
-    license = ""
-    init        = true
-    default_branch = "master"
+  static_website = {
+    dns = {
+      zone_id = dependency.dns.outputs.zone_id
+    }
+
+    description = "microbio.rs blog"
+    error_page = "error.html"
+    index_page = "index.html"
+    name = "blog"
   }
 }
 
 terraform {
-  source = "${get_parent_terragrunt_dir("root")}/..//terraform/modules/github-repo"
+  source = "${get_parent_terragrunt_dir("root")}/..//terraform/modules/static-website"
 }
