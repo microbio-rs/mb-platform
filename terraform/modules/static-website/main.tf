@@ -99,9 +99,40 @@ resource "aws_s3_bucket_policy" "mybucket" {
   bucket = aws_s3_bucket.b.id
   policy = data.aws_iam_policy_document.s3_policy.json
 
-  depends_on = [
-    aws_cloudfront_origin_access_control.default
-  ]
+  # depends_on = [
+  #   aws_cloudfront_origin_access_control.default
+  # ]
+}
+
+###############################################################################
+# ACL S3 Bucket for log
+################################################################################
+
+data "aws_iam_policy_document" "blog_s3_policy" {
+  statement {
+    actions   = ["s3:GetObject"]
+    resources = ["${var.log.bucket.arn}/${var.static_website.name}/*"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["${aws_cloudfront_origin_access_identity.example.iam_arn}"]
+    }
+  }
+
+  statement {
+    actions   = ["s3:ListBucket"]
+    resources = ["${var.log.bucket.arn}"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["${aws_cloudfront_origin_access_identity.example.iam_arn}"]
+    }
+  }
+}
+
+resource "aws_s3_bucket_policy" "blog" {
+  bucket = var.log.bucket.id
+  policy = data.aws_iam_policy_document.blog_s3_policy.json
 }
 
 ###############################################################################
@@ -120,11 +151,19 @@ resource "aws_cloudfront_origin_access_control" "default" {
   signing_protocol                  = "sigv4"
 }
 
+resource "aws_cloudfront_origin_access_identity" "example" {
+  comment = "Some comment"
+}
+
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name              = aws_s3_bucket.b.bucket_regional_domain_name
-    origin_access_control_id = aws_cloudfront_origin_access_control.default.id
+    # origin_access_control_id = aws_cloudfront_origin_access_control.default.id
     origin_id                = local.blog_s3_origin_id
+
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.example.cloudfront_access_identity_path
+    }
   }
 
   enabled             = true
@@ -132,11 +171,11 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   comment             = "Some comment"
   default_root_object = "index.html"
 
-  # logging_config {
-  #   include_cookies = false
-  #   bucket          = aws_s3_bucket.b.bucket_domain_name
-  #   prefix          = "logs"
-  # }
+  logging_config {
+    include_cookies = false
+    bucket          = var.log.bucket.domain_name
+    prefix          = var.static_website.name
+  }
 
   aliases = ["${var.static_website.name}.${data.aws_route53_zone.dns.name}"]
 

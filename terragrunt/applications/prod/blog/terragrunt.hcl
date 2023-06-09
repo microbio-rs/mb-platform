@@ -49,11 +49,10 @@ EOF
 
 dependency "dns" {
   config_path = "${get_parent_terragrunt_dir("root")}/shared/${include.stage.locals.stage}/network/dns"
-  # mock_outputs_allowed_terraform_commands = ["init", "validate", "plan"]
-  # mock_outputs = {
-  #   aws_alb_arn          = "arn:aws:elasticloadbalancing:eu-central-1:643202173500:   loadbalancer/app/ghost-alb/9XXX000XXX000XXX"
-  #   aws_sg_egress_all_id = "some-id"
-  # }
+}
+
+dependency "log" {
+  config_path = "${get_parent_terragrunt_dir("root")}/shared/${include.stage.locals.stage}/monitoring/log"
 }
 
 inputs = {
@@ -66,6 +65,14 @@ inputs = {
     error_page = "error.html"
     index_page = "index.html"
     name = "blog"
+  }
+
+  log = {
+    bucket = {
+      domain_name = dependency.log.outputs.domain_name
+      arn = dependency.log.outputs.arn
+      id = dependency.log.outputs.id
+    }
   }
 }
 

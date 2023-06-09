@@ -10,3 +10,14 @@ variable "static_website"  {
       name = string
   })
 }
+
+variable "log"  {
+  description = "cloud front log"
+  type = object({
+    bucket = object({
+      domain_name = string
+      arn = string
+      id = string
+    })
+  })
+}
