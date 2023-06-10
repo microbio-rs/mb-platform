@@ -99,9 +99,9 @@ resource "aws_s3_bucket_policy" "mybucket" {
   bucket = aws_s3_bucket.b.id
   policy = data.aws_iam_policy_document.s3_policy.json
 
-  # depends_on = [
-  #   aws_cloudfront_origin_access_control.default
-  # ]
+  depends_on = [
+    aws_cloudfront_origin_access_control.default
+  ]
 }
 
 ###############################################################################
@@ -114,8 +114,13 @@ data "aws_iam_policy_document" "blog_s3_policy" {
     resources = ["${var.log.bucket.arn}/${var.static_website.name}/*"]
 
     principals {
-      type        = "AWS"
-      identifiers = ["${aws_cloudfront_origin_access_identity.example.iam_arn}"]
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
+    }
+    condition {
+      test     = "StringEquals"
+      variable = "AWS:SourceArn"
+      values   = [aws_cloudfront_distribution.s3_distribution.arn]
     }
   }
 
@@ -124,8 +129,23 @@ data "aws_iam_policy_document" "blog_s3_policy" {
     resources = ["${var.log.bucket.arn}"]
 
     principals {
-      type        = "AWS"
-      identifiers = ["${aws_cloudfront_origin_access_identity.example.iam_arn}"]
+      type        = "Service"
+      identifiers = ["cloudfront.amazonaws.com"]
+    }
+    condition {
+      test     = "StringEquals"
+      variable = "AWS:SourceArn"
+      values   = [aws_cloudfront_distribution.s3_distribution.arn]
+    }
+    condition {
+      test     = "StringEquals"
+      variable = "s3:prefix"
+      values   = ["${var.static_website.name}/", "${var.static_website.name}/*"]
+    }
+    condition {
+      test     = "StringEquals"
+      variable = "s3:delimiter"
+      values   = ["/"]
     }
   }
 }
@@ -151,19 +171,11 @@ resource "aws_cloudfront_origin_access_control" "default" {
   signing_protocol                  = "sigv4"
 }
 
-resource "aws_cloudfront_origin_access_identity" "example" {
-  comment = "Some comment"
-}
-
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name              = aws_s3_bucket.b.bucket_regional_domain_name
-    # origin_access_control_id = aws_cloudfront_origin_access_control.default.id
+    origin_access_control_id = aws_cloudfront_origin_access_control.default.id
     origin_id                = local.blog_s3_origin_id
-
-    s3_origin_config {
-      origin_access_identity = aws_cloudfront_origin_access_identity.example.cloudfront_access_identity_path
-    }
   }
 
   enabled             = true
