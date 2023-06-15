@@ -9,11 +9,11 @@ module "vpc" {
   cidr = var.vpc.cidr
 
   azs             = var.vpc.zones
-  private_subnets = var.vpc.private
-  public_subnets  = var.vpc.public
+  private_subnets = var.vpc.privates
+  public_subnets  = var.vpc.publics
 
   enable_nat_gateway = var.vpc.has_nat
   enable_vpn_gateway = var.vpc.has_vpn
 
-  tags = var.vpc.tags
+  # tags = var.vpc.tags
 }

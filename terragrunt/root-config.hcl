@@ -2,7 +2,7 @@ locals {
   region = "us-east-1"
   github_owner = "microbio-rs"
 
-  version_terraform    = "=1.4.6"
+  version_terraform    = ">=1.4.6"
   version_terragrunt   = "=0.45.9"
   version_provider_aws = "=5.1.0"
   version_provider_github = "=5.0"

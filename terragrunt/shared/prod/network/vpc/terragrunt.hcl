@@ -47,7 +47,7 @@ inputs = {
       publics = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
       has_nat = false
       has_vpn = false
-      tags = locals.tags
+      # tags = local.tags
   }
 }
 

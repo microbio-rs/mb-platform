@@ -7,6 +7,6 @@ variable "vpc"  {
       publics = list(string)
       has_nat = bool
       has_vpn = bool
-      tags = map()
+      # tags = object()
   })
 }
